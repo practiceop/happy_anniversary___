@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary My Love 💖</title>
+     <script src="audio.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            cursor: none;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 25%, #fecfef 75%, #ffd1ff 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Custom Heart Cursor */
+        .heart-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 20px;
+            color: #ff69b4;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Heart Trail */
+        .heart-trail {
+            position: fixed;
+            pointer-events: none;
+            font-size: 16px;
+            color: rgba(255, 105, 180, 0.8);
+            animation: fadeTrail 2s forwards;
+            z-index: 9998;
+        }
+
+        @keyframes fadeTrail {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5) translateY(-20px); }
+        }
+
+        /* Background Hearts */
+        .floating-heart {
+            position: fixed;
+            color: rgba(255, 182, 193, 0.6);
+            font-size: 30px;
+            animation: float 8s infinite linear;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: fixed;
+            color: gold;
+            font-size: 12px;
+            animation: sparkle 3s infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        /* Main Content */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            padding: 20px;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 105, 180, 0.8); }
+            to { text-shadow: 0 0 30px rgba(255, 105, 180, 1), 0 0 40px rgba(255, 182, 193, 0.5); }
+        }
+
+        .typewriter {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 50px;
+            max-width: 600px;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+        }
+
+        /* Central Beating Heart */
+        .central-heart {
+            font-size: 120px;
+            color: #ff1493;
+            animation: heartBeat 1.5s infinite;
+            margin: 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.6));
+        }
+
+        .central-heart:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 30px rgba(255, 20, 147, 1));
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Anniversary Button */
+        .anniversary-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #c71585);
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anniversary-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+        }
+
+        .anniversary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .anniversary-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Surprise Modal */
+        .surprise-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .surprise-content {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .surprise-content.show {
+            transform: scale(1);
+        }
+
+        .surprise-title {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+        }
+
+        .surprise-message {
+            font-size: 1.2rem;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: white;
+            color: #ff1493;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            font-size: 20px;
+            animation: confettiFall 3s linear forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Hover Hearts */
+        .hover-heart {
+            position: fixed;
+            font-size: 30px;
+            color: #ff69b4;
+            pointer-events: none;
+            animation: hoverPop 1s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes hoverPop {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+
+        /* Love Messages */
+        .love-messages {
+            position: fixed;
+            font-size: 1rem;
+            color: white;
+            background: rgba(255, 105, 180, 0.8);
+            padding: 10px 15px;
+            border-radius: 20px;
+            pointer-events: none;
+            animation: messageFade 3s ease-out forwards;
+            z-index: 101;
+            text-shadow: none;
+        }
+
+        @keyframes messageFade {
+            0% { opacity: 0; transform: translateY(20px); }
+            20%, 80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        /* Music Controls */
+        .music-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: white;
+            color: #ff1493;
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5rem; }
+            .typewriter { font-size: 1.2rem; }
+            .central-heart { font-size: 80px; }
+            .anniversary-btn { font-size: 1rem; padding: 15px 30px; }
+        }
+          .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .music-control i {
+            color: #ff3d7f;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-cursor">💖</div>
+    
+    <div class="music-controls">
+        <button class="music-btn" id="musicToggle">🎵</button>
+    </div>
+
+    <div class="container">
+        <h1 class="main-title">Happy Anniversary, My Love 💖</h1>
+        <p class="typewriter" id="typewriter"></p>
+        <div class="central-heart" id="centralHeart">💖</div>
+        <button class="anniversary-btn" id="anniversaryBtn">Click to Start Our Forever Again 💞</button>
+    </div>
+
+    <div class="surprise-modal" id="surpriseModal">
+        <div class="surprise-content" id="surpriseContent">
+            <h2 class="surprise-title">Dear Baby💖💕</h2>
+            <p class="surprise-message">
+                Today, it's exactly 5 years since our love began.
+In these 5 years, we've been through a lot and faced many challenges. But still, we've overcome everything and stayed together.
+And the most important and final step is a head -->>convincing our parents and turning this love and anniversary inta a marriage very very soon baby 💖✨
+            </p>
+            <button class="close-btn" id="closeBtn">Forever Yours 💕</button>
+        </div>
+    </div>
+     <div class="music-control" onclick="backgroundMusic.toggle()">
+        <i class="fas fa-music">🎵</i>
+    </div>
+
+    
+
+    <script>
+        // Love messages array
+        const loveMessages = [
+            "You're my sunshine ☀️",
+            "Forever and always 💍",
+            "Every heartbeat is yours 💗",
+            "You complete me 💫",
+            "My heart belongs to you 💕",
+            "Together forever 🌟",
+            "You're my everything 💖",
+            "Soulmates for life 👑"
+        ];
+
+        // Heart cursor follow
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.heart-cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            // Create heart trail
+            createHeartTrail(e.clientX, e.clientY);
+        });
+
+        // Create heart trail
+        function createHeartTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'heart-trail';
+            trail.innerHTML = '💕';
+            trail.style.left = x + Math.random() * 20 - 10 + 'px';
+            trail.style.top = y + Math.random() * 20 - 10 + 'px';
+            document.body.appendChild(trail);
+
+            setTimeout(() => trail.remove(), 2000);
+        }
+
+        // Typewriter effect
+        function typeWriter() {
+            const text = "This is our 5th anniversary - 30 June 2025";
+            const element = document.getElementById('typewriter');
+            let i = 0;
+            
+            element.style.opacity = '1';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 100);
+                }
+            }
+            type();
+        }
+
+        // Start typewriter after page load
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 1000);
+        });
+
+        // Create floating hearts
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = Math.random() > 0.5 ? '💖' : '💕';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        // Create sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 3000);
+        }
+
+        // Generate floating hearts and sparkles
+        setInterval(createFloatingHeart, 1000);
+        setInterval(createSparkle, 2000);
+
+        // Central heart interactions
+        document.getElementById('centralHeart').addEventListener('mouseenter', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            
+            // Create hover heart
+            const hoverHeart = document.createElement('div');
+            hoverHeart.className = 'hover-heart';
+            hoverHeart.innerHTML = '💖';
+            hoverHeart.style.left = x + 'px';
+            hoverHeart.style.top = y + 'px';
+            document.body.appendChild(hoverHeart);
+
+            // Show love message
+            const message = document.createElement('div');
+            message.className = 'love-messages';
+            message.innerHTML = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+            message.style.left = x - 50 + 'px';
+            message.style.top = y - 100 + 'px';
+            document.body.appendChild(message);
+
+            setTimeout(() => {
+                hoverHeart.remove();
+                message.remove();
+            }, 3000);
+        });
+
+        // Anniversary button click
+        // ...existing code...
+document.getElementById('anniversaryBtn').addEventListener('click', () => {
+    createConfetti();
+    showSurprise();
+
+    // Smooth redirect after a short delay
+    setTimeout(() => {
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+            window.location.href = 'memory.html'; // Change to your next page
+        }, 800); // Match the transition duration
+    }, 2000); // Wait for confetti/surprise, adjust as needed
+});
+// ...existing code...
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['💖', '💕', '💗', '💓', '💝'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.innerHTML = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = Math.random() * 1 + 's';
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 100);
+            }
+        }
+
+        // Show surprise modal
+        function showSurprise() {
+            const modal = document.getElementById('surpriseModal');
+            const content = document.getElementById('surpriseContent');
+            
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                content.classList.add('show');
+            }, 100);
+        }
+
+        // Close surprise modal
+        document.getElementById('closeBtn').addEventListener('click', () => {
+            const modal = document.getElementById('surpriseModal');
+            const content = document.getElementById('surpriseContent');
+            
+            content.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 500);
+        });
+
+        // Music controls
+        const music = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicToggle.innerHTML = '🎵';
+            } else {
+                music.play().catch(() => {
+                    // Handle autoplay restrictions
+                    console.log('Autoplay prevented');
+                });
+                musicToggle.innerHTML = '🔇';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Try to autoplay music on first interaction
+        document.addEventListener('click', () => {
+            if (!isPlaying) {
+                music.play().catch(() => {});
+                musicToggle.innerHTML = '🔇';
+                isPlaying = true;
+            }
+        }, { once: true });
+
+        // Firework hearts on random intervals
+        function createFireworkHeart() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            
+            for (let i = 0; i < 8; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '💖';
+                heart.style.position = 'fixed';
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.fontSize = '20px';
+                heart.style.color = '#ff69b4';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '100';
+                
+                const angle = (i * 45) * Math.PI / 180;
+                const distance = 100;
+                const endX = x + Math.cos(angle) * distance;
+                const endY = y + Math.sin(angle) * distance;
+                
+                heart.animate([
+                    { transform: 'translate(0, 0) scale(0)', opacity: 1 },
+                    { transform: `translate(${endX - x}px, ${endY - y}px) scale(1)`, opacity: 0 }
+                ], {
+                    duration: 1500,
+                    easing: 'ease-out'
+                }).onfinish = () => heart.remove();
+                
+                document.body.appendChild(heart);
+            }
+        }
+
+        // Random firework hearts
+        setInterval(createFireworkHeart, 8000);
+
+        // Add some initial sparkles
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createSparkle, i * 200);
+        }
+    </script>
+</body>
+</html>
